@@ -12,9 +12,14 @@ class RecipesController < ApplicationController
   end
 
   def create
-    recipe = current_user.recipes.new(recipe_params)
-    recipe.save!
-    redirect_to recipes_url, notice: "レシピ「#{recipe.name}」を登録しました"
+    @recipe = current_user.recipes.new(recipe_params)
+
+    if @recipe.save
+      redirect_to @recipe, notice: "レシピ「#{@recipe.name}」を登録しました"
+    else
+      render :new
+    end
+
   end
 
   def edit
@@ -22,9 +27,14 @@ class RecipesController < ApplicationController
   end
 
   def update
-    recipe = current_user.recipes.find(params[:id])
-    recipe.update!(recipe_params)
-    redirect_to recipes_url, notice: "レシピ「#{recipe.name}」を更新しました"
+    @recipe = current_user.recipes.find(params[:id])
+
+    if @recipe.update(recipe_params)
+      redirect_to recipes_url, notice: "レシピ「#{@recipe.name}」を更新しました"
+    else
+      render :edit
+    end
+
   end
 
   def destroy

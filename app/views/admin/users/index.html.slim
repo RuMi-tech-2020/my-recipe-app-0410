@@ -17,7 +17,7 @@ table.table.table-hover
         tr
           td= link_to user.name, [:admin, user]
           td= user.email
-          td= user.admin? ? 'あり' : 'なし'
+          td= user.admin? ? '管理者' : 'ユーザー'
           td= user.created_at
           td= user.updated_at
           td

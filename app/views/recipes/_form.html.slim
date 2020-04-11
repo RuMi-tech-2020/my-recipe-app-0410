@@ -1,3 +1,8 @@
+- if recipe.errors.present? # 検証エラーの有無を調べる
+  ul#error_explanation
+    - recipe.errors.full_messages.each do |message|
+      li= message
+
 = form_with model: recipe, local: true do |f|
   .form-group
     = f.label :name
