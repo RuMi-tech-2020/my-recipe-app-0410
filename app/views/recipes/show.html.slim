@@ -14,6 +14,9 @@ table.table.table-hover
       th= Recipe.human_attribute_name(:description)
       td= simple_format(h(@recipe.description), {}, sanitize: false, wrapper_tag: "div")
     tr
+      th= Recipe.human_attribute_name(:image)
+      td= image_tag @recipe.image, class: 'img-fluid' if @recipe.image.attached?
+    tr
       th= Recipe.human_attribute_name(:created_at)
       td= @recipe.created_at
     tr
