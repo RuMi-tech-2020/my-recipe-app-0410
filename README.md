@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # README
 
 This README would normally document whatever steps are necessary to get the
@@ -23,3 +24,8 @@ Things you may want to cover:
 
 * ...
 # my-recipe-app-0410
+=======
+Hi! Everyone.
+
+This is README.
+>>>>>>> 98445ae4cd5e9f32318b4198d37d44ef65510e77
