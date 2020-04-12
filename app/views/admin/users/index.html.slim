@@ -15,9 +15,9 @@ table.table.table-sm.table-hover
     tbody
       - @users.each do |user|
         tr
-          td= link_to user.name, [:admin, user]
+          th= link_to user.name, [:admin, user]
           td= user.email
-          td= user.admin? ? '管理者' : 'ユーザー'
+          td.text-nowrap= user.admin? ? '管理者' : 'ユーザー'
           td= l user.created_at, format: :short
           td= l user.updated_at, format: :short
           td

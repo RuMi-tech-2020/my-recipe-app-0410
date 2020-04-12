@@ -1,6 +1,6 @@
-h1 ユーザ登録
+h1 ユーザー登録
 
-.nav.justify-content-end
-  = link_to '一覧', admin_users_path, class: 'nav-link'
+.nav.justify-content-end.mb-3
+  = link_to 'ユーザー一覧へ', admin_users_path, class: 'nav-link btn btn-outline-primary'
 
 = render partial: 'form', locals: { user: @user }

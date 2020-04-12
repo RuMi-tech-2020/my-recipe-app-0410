@@ -1,7 +1,7 @@
 h1  レシピ詳細
 
-.nav.justify-content-end
-  = link_to '一覧', recipes_path, class: 'nav-link'
+.nav.justify-content-end.mb-3
+  = link_to 'レシピ一覧へ', recipes_path, class: 'nav-link btn btn-outline-primary'
 .table-responsive
   table.table.table-hover
     tbody
@@ -19,10 +19,10 @@ h1  レシピ詳細
         td= image_tag @recipe.image, class: 'img-fluid' if @recipe.image.attached?
       tr
         th.text-nowrap= Recipe.human_attribute_name(:created_at)
-        td= @recipe.created_at
+        td= l @recipe.created_at, format: :short
       tr
         th.text-nowrap= Recipe.human_attribute_name(:updated_at)
-        td= @recipe.updated_at
+        td= l @recipe.updated_at, format: :short
       
   = link_to '編集', edit_recipe_path, class: 'btn btn-primary mr-3'
   = link_to '削除', @recipe, method: :delete, data: { confirm: "レシピ{#{@recipe.name}}を削除します。よろしいですか？"}, class: 'btn btn-danger'
