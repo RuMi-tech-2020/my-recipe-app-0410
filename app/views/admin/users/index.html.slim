@@ -3,14 +3,14 @@ h1 ユーザー一覧
 = link_to  "新規登録", new_admin_user_path, class: 'btn btn-primary'
 
 .mb-3
-table.table.table-hover
+table.table.table-sm.table-hover
   tread.thread-default
     tr
-      th= User.human_attribute_name(:name)
-      th= User.human_attribute_name(:email)
-      th= User.human_attribute_name(:admin)
-      th= User.human_attribute_name(:created_at)
-      th= User.human_attribute_name(:updated_at)
+      th.text-nowrap= User.human_attribute_name(:name)
+      th.text-nowrap= User.human_attribute_name(:email)
+      th.text-nowrap= User.human_attribute_name(:admin)
+      th.text-nowrap= User.human_attribute_name(:created_at)
+      th.text-nowrap= User.human_attribute_name(:updated_at)
       th
     tbody
       - @users.each do |user|
@@ -18,8 +18,8 @@ table.table.table-hover
           td= link_to user.name, [:admin, user]
           td= user.email
           td= user.admin? ? '管理者' : 'ユーザー'
-          td= user.created_at
-          td= user.updated_at
+          td= l user.created_at, format: :short
+          td= l user.updated_at, format: :short
           td
-            = link_to  "編集", edit_admin_user_path(user), class: 'btn btn-primary mr-3'
-            = link_to  "削除", [:admin, user], method: :delete, data: { confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger'
+            = link_to  "編集", edit_admin_user_path(user), class: 'btn btn-primary mr-md-3 text-nowrap'
+            = link_to  "削除", [:admin, user], method: :delete, data: { confirm: "ユーザー「#{user.name}」を削除します。よろしいですか？" }, class: 'btn btn-danger text-nowrap'
