@@ -16,6 +16,6 @@ table.table.table-hover
         th= link_to recipe.name, recipe
         td= l recipe.created_at, format: :short
         td= l recipe.updated_at, format: :short
-        td
-          = link_to '編集', edit_recipe_path(recipe), class: 'btn btn-primary mr-md-3'
-          = link_to '削除', recipe, method: :delete, data: { confirm: "レシピ{#{recipe.name}}を削除します。よろしいですか？"}, class: 'btn btn-danger'
+        / td
+          / = link_to '編集', edit_recipe_path(recipe), class: 'btn btn-primary mr-md-3'
+          / = link_to '削除', recipe, method: :delete, data: { confirm: "レシピ{#{recipe.name}}を削除します。よろしいですか？"}, class: 'btn btn-danger'
