@@ -5,6 +5,14 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    # @comments = @recipe.comments
+    @comments = Comment.find_by(id: params[:comment_id])
+    # @user = User.find_by(id: @comments.user_id)
+    @comment = @recipe.comments.build
+    # commenter = @recipe.comments.user_id
+
+    # @commenter = User.find_by(id: @comments.user_id)
+    # @user = Comment.find_by(id: @comments.user_id)
   end
 
   def new
@@ -42,6 +50,11 @@ class RecipesController < ApplicationController
     recipe.destroy
     redirect_to recipes_url, notice: "レシピ「#{recipe.name}」を削除しました"
   end
+
+  # def user
+  #   #インスタンスメソッドないで、selfはインスタンス自身を表す
+  #   return User.find_by(id: self.user_id)
+  # end
 
   private
 
