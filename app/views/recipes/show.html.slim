@@ -1,4 +1,4 @@
-h1  レシピ詳細
+h1= @recipe.name
 
 .nav.justify-content-end.mb-3
   = link_to 'レシピ一覧へ', recipes_path, class: 'nav-link btn btn-outline-primary'
@@ -9,14 +9,11 @@ h1  レシピ詳細
         th.text-nowrap= Recipe.human_attribute_name(:id)
         td= @recipe.id
       tr
-        th.text-nowrap= Recipe.human_attribute_name(:name)
-        td= @recipe.name
-      tr
         th.text-nowrap= Recipe.human_attribute_name(:description)
         td= simple_format(h(@recipe.description), {}, sanitize: false, wrapper_tag: "div")
       tr
         th.text-nowrap= Recipe.human_attribute_name(:image)
-        td= image_tag @recipe.image, class: 'img-fluid' if @recipe.image.attached?
+        td= image_tag @recipe.image, class: 'img-fluid rounded' if @recipe.image.attached?
       tr
         th.text-nowrap= Recipe.human_attribute_name(:created_at)
         td= l @recipe.created_at, format: :short
@@ -26,3 +23,23 @@ h1  レシピ詳細
   - if current_user.id == @recipe.user_id
     = link_to '編集', edit_recipe_path, class: 'btn btn-primary mr-3'
     = link_to '削除', @recipe, method: :delete, data: { confirm: "「#{@recipe.name}」のレシピを削除します。よろしいですか？"}, class: 'btn btn-danger'
+
+.container.mt-5.mb-5
+  h3
+    | Comments
+    = form_with(model: [@recipe, @comment], local: true) do |f|
+      .form-group
+        = f.text_field :body, class: 'form-control'
+      =f.submit "投稿する！", class: 'btn btn-primary'
+  - if @recipe.comments.any?
+    .list-group
+      - @recipe.comments.each do |comment|
+        a.list-group-item
+          .d-flex.w-70.mb-3.justify-content-between
+            = comment.body
+            - if comment.user_id == current_user.id
+              = button_to '削除', "/recipes/#{@recipe.id}/comments/#{comment.id}", method: :delete, data: { confirm: "コメント「#{comment.body}」を削除します。よろしいですか？"}, class: 'btn btn-danger'           
+          .d-flex.w-70.justify-content-between
+            small= comment.user_id.name
+            / I18n.l(Commnet.first.created_at, format: :short)
+            small= comment.created_at
