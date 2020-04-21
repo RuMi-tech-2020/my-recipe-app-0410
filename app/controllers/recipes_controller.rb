@@ -6,13 +6,14 @@ class RecipesController < ApplicationController
   def show
     @recipe = Recipe.find(params[:id])
     # @comments = @recipe.comments
-    @comments = Comment.find_by(id: params[:comment_id])
-    # @user = User.find_by(id: @comments.user_id)
+    # @comments = Comment.find_by(recipe_id: @recipe.id)
+    # @user = User.find_by(id: @recipe.comments.user_id)
     @comment = @recipe.comments.build
+    # @commenter = User.find_by(id: @comments.user_id)
     # commenter = @recipe.comments.user_id
 
     # @commenter = User.find_by(id: @comments.user_id)
-    # @user = Comment.find_by(id: @comments.user_id)
+    @user = User.all
   end
 
   def new

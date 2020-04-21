@@ -20,6 +20,8 @@ h1= @recipe.name
       tr
         th.text-nowrap= Recipe.human_attribute_name(:updated_at)
         td= l @recipe.updated_at, format: :short
+      / tr
+      /   td= @user.name
   - if current_user.id == @recipe.user_id
     = link_to '編集', edit_recipe_path, class: 'btn btn-primary mr-3'
     = link_to '削除', @recipe, method: :delete, data: { confirm: "「#{@recipe.name}」のレシピを削除します。よろしいですか？"}, class: 'btn btn-danger'
@@ -40,6 +42,8 @@ h1= @recipe.name
             - if comment.user_id == current_user.id
               = button_to '削除', "/recipes/#{@recipe.id}/comments/#{comment.id}", method: :delete, data: { confirm: "コメント「#{comment.body}」を削除します。よろしいですか？"}, class: 'btn btn-danger'           
           .d-flex.w-70.justify-content-between
-            small= comment.user_id.name
+            / small = User.find_by(id: @recipe.user_id)
+            small= @user[comment.user_id].name
+            / small= comment.user_id.name
             / I18n.l(Commnet.first.created_at, format: :short)
             small= comment.created_at
