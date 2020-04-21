@@ -35,15 +35,12 @@ h1= @recipe.name
       =f.submit "投稿する！", class: 'btn btn-primary'
   - if @recipe.comments.any?
     .list-group
-      - @recipe.comments.each do |comment|
-        a.list-group-item
-          .d-flex.w-70.mb-3.justify-content-between
-            = comment.body
-            - if comment.user_id == current_user.id
-              = button_to '削除', "/recipes/#{@recipe.id}/comments/#{comment.id}", method: :delete, data: { confirm: "コメント「#{comment.body}」を削除します。よろしいですか？"}, class: 'btn btn-danger'           
-          .d-flex.w-70.justify-content-between
-            / small = User.find_by(id: @recipe.user_id)
-            small= @user[comment.user_id].name
-            / small= comment.user_id.name
-            / I18n.l(Commnet.first.created_at, format: :short)
-            small= comment.created_at
+    - @recipe.comments.each do |comment|
+      a.list-group-item
+        .d-flex.w-70.mb-3.justify-content-between
+          = comment.body
+          - if comment.user_id == current_user.id
+            = button_to '削除', "/recipes/#{@recipe.id}/comments/#{comment.id}", method: :delete, data: { confirm: "コメント「#{comment.body}」を削除します。よろしいですか？"}, class: 'btn btn-danger'           
+        .d-flex.w-70.justify-content-between
+          / I18n.l(Commnet.first.created_at, format: :short)
+          small= comment.created_at
